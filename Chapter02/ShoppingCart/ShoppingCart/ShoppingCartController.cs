@@ -50,17 +50,14 @@
 		//応答データの書式設定
 		//https://docs.microsoft.com/ja-jp/aspnet/core/web-api/advanced/formatting?view=aspnetcore-5.0
 
-		[HttpPost("hoge/{str}")]
-		public Hoge GetHoge(string str, [FromBody] Rootobject hoge)
+		[HttpGet("hoge/{str}")]
+		public Hoge GetHoge(string str, [FromBody] Hoge hoge)
 		{
 			Debug.WriteLine($"str={str}");
 			Debug.WriteLine($"hoge={hoge}");
 			return new Hoge { I = 123, N = "abc" };
 		}
-		public record Rootobject
-		{
-			public Hoge? Root { get; set; }
-		}
+
 		public record Hoge
 		{
 			public int I { get; set; }
