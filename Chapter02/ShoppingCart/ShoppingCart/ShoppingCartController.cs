@@ -46,22 +46,26 @@
 			this.shoppingCartStore.Save(shoppingCart);
 			return shoppingCart;
 		}
+	}
+	namespace Abe
+	{
 
-		//応答データの書式設定
-		//https://docs.microsoft.com/ja-jp/aspnet/core/web-api/advanced/formatting?view=aspnetcore-5.0
 
-		[HttpGet("hoge/{str}")]
-		public Hoge GetHoge(string str, [FromBody] Hoge hoge)
+		[Route("/shoppingcart")]
+		public class AbeController : ControllerBase
 		{
-			Debug.WriteLine($"str={str}");
-			Debug.WriteLine($"hoge={hoge}");
-			return new Hoge { I = 123, N = "abc" };
-		}
+			//応答データの書式設定
+			//https://docs.microsoft.com/ja-jp/aspnet/core/web-api/advanced/formatting?view=aspnetcore-5.0
 
-		public record Hoge
-		{
-			public int I { get; set; }
-			public string N { get; set; } = "";
+			[HttpGet("hoge/{str}")]
+			public Hoge GetHoge(string str, [FromBody] Hoge hoge)
+			{
+				Debug.WriteLine($"str={str}");
+				Debug.WriteLine($"hoge={hoge}");
+				return new Hoge(I: hoge.I + 2, N: "abc");
+			}
+
+			public record Hoge(int I, string N) { public string M { get; set; } = ""; }
 		}
 	}
 }
